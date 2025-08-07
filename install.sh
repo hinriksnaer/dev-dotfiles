@@ -6,6 +6,7 @@ DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; f
 
 # create a list of all packages to be installed
 packages=(
+  tmux
   neovim
   zsh
   btop
@@ -16,6 +17,7 @@ packages=(
   starship
 )
 
+# add sources for packages
 dnf copr enable -y atim/starship
 dnf copr enable -y atim/lazygit
 
@@ -43,3 +45,20 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
 chsh -s /bin/zsh
+
+# Define the path to your tmux configuration file
+TMUX_CONF_FILE="$HOME/.config/tmux/tmux.conf"
+
+# Define the path to TPM
+TPM_DIR="$HOME/.config/tmux/plugins/tpm"
+
+# Check if TPM is installed, if not, clone it
+git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+
+# Source the tmux configuration file
+echo "Sourcing tmux configuration from $TMUX_CONF_FILE..."
+tmux source-file "$TMUX_CONF_FILE"
+
+# Install TPM plugins
+echo "Installing/updating TPM plugins..."
+"$TPM_DIR/bin/install_plugins"
