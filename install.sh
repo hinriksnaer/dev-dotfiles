@@ -59,6 +59,6 @@ tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; tmux refresh
 
 # Step 3: Send 'C-Space' + 'I' to trigger the plugin installation (reload) through TPM
 tmux send-keys -t temp_session C-Space 'I'
-
+sleep 2
 # Step 4: Clean up by killing the temporary tmux session
 tmux kill-session -t temp_session
