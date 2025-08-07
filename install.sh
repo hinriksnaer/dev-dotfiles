@@ -40,4 +40,4 @@ wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubuserc
 chsh -s /bin/zsh
 
 # setup starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh --yes
