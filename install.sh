@@ -16,7 +16,7 @@ packages=(
   starship
 )
 
-dnf copr enable atim/starship
+dnf copr enable -y atim/starship
 dnf copr enable -y atim/lazygit
 
 dnf install -y dnf-plugins-core
