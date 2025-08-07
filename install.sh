@@ -49,11 +49,8 @@ chsh -s /bin/zsh
 # Define the path to your tmux configuration file
 TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
-# Define the path to TPM
-TPM_DIR="$HOME/.config/tmux/plugins/tpm"
-
 # Check if TPM is installed, if not, clone it
-git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Step 1: Run tmux to initialize it (in case it's not started)
 tmux start-server
