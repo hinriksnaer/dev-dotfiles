@@ -46,19 +46,13 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
 chsh -s /bin/zsh
 
-# Define the path to your tmux configuration file
-TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
-
-# Step 1: Run tmux to initialize it (in case it's not started)
-tmux start-server
-
+# Setup tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Step 2: Start a new tmux session in the background
-tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; tmux refresh-client"
+echo "Starting tmux session..."
 
-# Step 3: Send 'C-Space' + 'I' to trigger the plugin installation (reload) through TPM
-tmux send-keys -t temp_session C-Space 'I'
-sleep 2
-# Step 4: Clean up by killing the temporary tmux session
-tmux kill-session -t temp_session
+tmux new-session -d 'tmux source-file ~/.config/tmux/tmux.conf; tmux run-shell ~/.tmux/plugins/tpm/tpm; tmux kill-session'
+
+tmux attach-session -d
+
+echo "tmux setup and plugin installation complete. tmux will exit automatically once complete."
