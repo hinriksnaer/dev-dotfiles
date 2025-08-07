@@ -9,7 +9,6 @@ packages=(
   neovim
   zsh
   btop
-  cava
   fzf
   stow
   lsd
