@@ -15,6 +15,9 @@ packages=(
   lazygit
 )
 
+# setup starship
+curl -sS https://starship.rs/install.sh | sh
+
 dnf install -y dnf-plugins-core &&
   dnf copr enable -y atim/lazygit &&
   dnf upgrade --refresh -y &&

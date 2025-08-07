@@ -14,11 +14,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# check the dnf plugins commands here
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dnf
-
-fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
-
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 
@@ -33,3 +28,5 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
+
+ eval "$(starship init zsh)"
