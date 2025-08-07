@@ -49,6 +49,8 @@ chsh -s /bin/zsh
 # Define the path to your tmux configuration file
 TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Step 1: Run tmux to initialize it (in case it's not started)
 tmux start-server
 
