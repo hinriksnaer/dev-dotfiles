@@ -49,13 +49,14 @@ chsh -s /bin/zsh
 # Define the path to your tmux configuration file
 TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
-# Check if TPM is installed, if not, clone it
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 # Step 1: Run tmux to initialize it (in case it's not started)
 tmux start-server
-# Step 2: Source the tmux configuration file
+
+# Step 2: Start a new tmux session in the background
 tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; tmux refresh-client"
-# Step 3: Install TPM packages
-tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; sleep 2; ~/.tmux/plugins/tpm/bin/install_plugins; tmux kill-session -t temp_session"
-tmux kill-server
+
+# Step 3: Send 'C-Space' + 'I' to trigger the plugin installation (reload) through TPM
+tmux send-keys -t temp_session C-Space 'I'
+
+# Step 4: Clean up by killing the temporary tmux session
+tmux kill-session -t temp_session
