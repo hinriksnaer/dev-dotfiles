@@ -29,4 +29,4 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
- eval "$(starship init zsh)"
+eval "$(starship init zsh)"

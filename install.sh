@@ -15,9 +15,6 @@ packages=(
   lazygit
 )
 
-# setup starship
-curl -sS https://starship.rs/install.sh | sh
-
 dnf install -y dnf-plugins-core &&
   dnf copr enable -y atim/lazygit &&
   dnf upgrade --refresh -y &&
@@ -41,3 +38,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
 chsh -s /bin/zsh
+
+# setup starship
+curl -sS https://starship.rs/install.sh | sh
