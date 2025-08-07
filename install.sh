@@ -13,12 +13,17 @@ packages=(
   stow
   lsd
   lazygit
+  starship
 )
 
-dnf install -y dnf-plugins-core &&
-  dnf copr enable -y atim/lazygit &&
-  dnf upgrade --refresh -y &&
-  dnf install -y "${packages[@]}"
+dnf copr enable atim/starship
+dnf copr enable -y atim/lazygit
+
+dnf install -y dnf-plugins-core
+
+dnf upgrade --refresh -y
+
+dnf install -y "${packages[@]}"
 
 # link
 for package in "${packages[@]}"; do
@@ -38,6 +43,3 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
 chsh -s /bin/zsh
-
-# setup starship
-curl -sS https://starship.rs/install.sh | sh --yes
