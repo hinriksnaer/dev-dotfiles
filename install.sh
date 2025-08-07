@@ -47,7 +47,7 @@ wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme https://raw.githubuserc
 chsh -s /bin/zsh
 
 # Define the path to your tmux configuration file
-TMUX_CONF_FILE="$HOME/.config/tmux/tmux.conf"
+TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 # Define the path to TPM
 TPM_DIR="$HOME/.config/tmux/plugins/tpm"
@@ -55,10 +55,10 @@ TPM_DIR="$HOME/.config/tmux/plugins/tpm"
 # Check if TPM is installed, if not, clone it
 git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
 
-# Source the tmux configuration file
-echo "Sourcing tmux configuration from $TMUX_CONF_FILE..."
-tmux source-file "$TMUX_CONF_FILE"
-
-# Install TPM plugins
-echo "Installing/updating TPM plugins..."
-"$TPM_DIR/bin/install_plugins"
+# Step 1: Run tmux to initialize it (in case it's not started)
+tmux start-server
+# Step 2: Source the tmux configuration file
+tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; tmux refresh-client"
+# Step 3: Install TPM packages
+tmux new-session -d -s temp_session "tmux source-file $TMUX_CONFIG; sleep 2; ~/.tmux/plugins/tpm/bin/install_plugins; tmux kill-session -t temp_session"
+tmux kill-server
