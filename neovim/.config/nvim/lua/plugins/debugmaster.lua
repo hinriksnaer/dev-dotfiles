@@ -8,7 +8,7 @@ return {
       local dm = require 'debugmaster'
       -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
       -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
-      vim.keymap.set({ 'n', 'v' }, '<leader>dm', dm.mode.toggle, { nowait = true, desc = 'Debug Mode' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>dd', dm.mode.toggle, { nowait = true, desc = 'Debug Mode' })
 
       dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
     end,
