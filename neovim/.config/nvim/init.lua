@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -106,10 +105,14 @@ vim.o.number = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
-
+-- global default
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
-
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -348,7 +351,7 @@ require('lazy').setup({
         { '<leader>s', group = 'Search' },
         { '<leader>t', group = 'Toggle' },
         { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
-	{ '<leader>d', group = ' Debug' }
+        { '<leader>d', group = ' Debug' },
       },
     },
   },
