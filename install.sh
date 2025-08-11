@@ -45,7 +45,7 @@ case "$ARCH" in
 esac
 
 # Install latest Neovim (AppImage, x86_64)
-curl -fL -o /tmp/nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/${FILE}"
+curl -fL -o /tmp/nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 tar -xzf /tmp/nvim.tar.gz -C /opt
 ln -sf "/opt/${DIR}/bin/nvim" /usr/local/bin/nvim
 rm -f /tmp/nvim.tar.gz
