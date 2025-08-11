@@ -7,7 +7,6 @@ DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; f
 # create a list of all packages to be installed
 packages=(
   tmux
-  neovim
   zsh
   btop
   fzf
@@ -37,6 +36,16 @@ for package in "${packages[@]}"; do
   echo "Stowing $package in $DIR"
   stow -t "$DIR" "$package"
 done
+
+# Install latest Neovim (AppImage, x86_64)
+curl -fL -o /tmp/nvim.appimage https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod +x /tmp/nvim.appimage
+/tmp/nvim.appimage --appimage-extract >/dev/null
+mv squashfs-root /opt/nvim
+ln -sf /opt/nvim/AppRun /usr/local/bin/nvim
+rm -f /tmp/nvim.appimage
+
+stow -t "DIR" neovim
 
 RUNZSH=no KEEP_ZSHRC=yes sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
