@@ -37,13 +37,18 @@ for package in "${packages[@]}"; do
   stow -t "$DIR" "$package"
 done
 
+ARCH="$(uname -m)"
+case "$ARCH" in
+  x86_64)  FILE="nvim-linux64.tar.gz";  DIR="nvim-linux64" ;;
+  aarch64) FILE="nvim-linux-arm64.tar.gz"; DIR="nvim-linux-arm64" ;;
+  *) echo "Unsupported arch: $ARCH"; exit 1 ;;
+esac
+
 # Install latest Neovim (AppImage, x86_64)
-curl -fL -o /tmp/nvim.appimage https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod +x /tmp/nvim.appimage
-/tmp/nvim.appimage --appimage-extract >/dev/null
-mv squashfs-root /opt/nvim
-ln -sf /opt/nvim/AppRun /usr/local/bin/nvim
-rm -f /tmp/nvim.appimage
+curl -fL -o /tmp/nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/${FILE}"
+tar -xzf /tmp/nvim.tar.gz -C /opt
+ln -sf "/opt/${DIR}/bin/nvim" /usr/local/bin/nvim
+rm -f /tmp/nvim.tar.gz
 
 stow -t "DIR" neovim
 
