@@ -50,7 +50,7 @@ tar -xzf /tmp/nvim.tar.gz -C /opt
 ln -sf "/opt/${DIR}/bin/nvim" /usr/local/bin/nvim
 rm -f /tmp/nvim.tar.gz
 
-stow -t "DIR" neovim
+stow -t "$DIR" neovim
 
 RUNZSH=no KEEP_ZSHRC=yes sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
