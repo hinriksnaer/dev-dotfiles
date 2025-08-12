@@ -13,6 +13,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+export PYTHONPATH=$PYTHONPATH:/workspaces/tmp-torch-container/pytorch
 
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
