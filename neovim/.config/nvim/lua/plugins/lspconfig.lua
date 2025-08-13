@@ -62,28 +62,27 @@ return {
         map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
         map('gr', require('telescope.builtin').lsp_references, 'Go to References')
         map('gi', vim.lsp.buf.implementation, 'Go to Implementation')
-        map('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
-        map('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+        map('<leader>cD', vim.lsp.buf.type_definition, 'Type Definition')
+        map('<leader>cs', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
         -- Hover & Info
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
         -- Actions
-        map('<leader>rn', vim.lsp.buf.rename, 'Rename')
+        map('<leader>cn', vim.lsp.buf.rename, 'Rename')
         map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
         -- Diagnostics
         map('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic')
         map(']d', vim.diagnostic.goto_next, 'Go to next diagnostic')
-        map('<leader>e', vim.diagnostic.open_float, 'Show diagnostic')
-        map('<leader>q', vim.diagnostic.setloclist, 'Diagnostics to location list')
+        map('<leader>le', vim.diagnostic.open_float, 'Show diagnostic')
+        map('<leader>lq', vim.diagnostic.setloclist, 'Diagnostics to location list')
 
         -- Formatting
-        map('<leader>f', function()
+        map('<leader>cf', function()
           vim.lsp.buf.format { async = true }
-        end, 'Format file')
+        end, 'Format')
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         ---@param client vim.lsp.Client
         ---@param method vim.lsp.protocol.Method
