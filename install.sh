@@ -6,6 +6,7 @@ DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; f
 
 # create a list of all packages to be installed
 packages=(
+  ripgrep
   tmux
   zsh
   btop
