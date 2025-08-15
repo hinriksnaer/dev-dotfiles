@@ -352,6 +352,7 @@ require('lazy').setup({
         { '<leader>t', group = 'Toggle' },
         { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
         { '<leader>d', group = 'Debug' },
+        { '<leader>D', group = 'Debug UI' },
         { '<leader>c', group = 'Code' },
         { '<leader>e', group = 'Evaluate' },
         { '<leader>l', group = 'LSP' },

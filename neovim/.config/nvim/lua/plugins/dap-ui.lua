@@ -24,15 +24,6 @@ return {
       expand_lines = true,
     }
 
-    -- Auto-close on end (we’ll toggle layouts manually)
-    dap.listeners.after.event_initialized['dapui_onepanel'] = function() end
-    dap.listeners.before.event_terminated['dapui_onepanel'] = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited['dapui_onepanel'] = function()
-      dapui.close()
-    end
-
     -- ----- Single-panel switcher -----
     local L = { scopes = 1, breakpoints = 2, stacks = 3, watches = 4, repl = 5, console = 6, watches_repl = 7 }
     local current -- currently open layout index, or nil
@@ -66,28 +57,28 @@ return {
 
     -- Keymaps: swap between panels (press again to hide)
     local map = vim.keymap.set
-    map('n', '<leader>dps', function()
+    map('n', '<leader>Ds', function()
       toggle_layout(L.scopes)
     end, { desc = 'Scopes' })
-    map('n', '<leader>dpb', function()
+    map('n', '<leader>Db', function()
       toggle_layout(L.breakpoints)
     end, { desc = 'Breakpoints' })
-    map('n', '<leader>dpt', function()
+    map('n', '<leader>Dt', function()
       toggle_layout(L.stacks)
     end, { desc = 'Stacks' })
-    map('n', '<leader>dpw', function()
+    map('n', '<leader>Dw', function()
       toggle_layout(L.watches)
     end, { desc = 'Watches' })
-    map('n', '<leader>dpr', function()
+    map('n', '<leader>Dr', function()
       toggle_layout(L.repl)
     end, { desc = 'REPL' })
-    map('n', '<leader>dpc', function()
+    map('n', '<leader>Dc', function()
       toggle_layout(L.console)
     end, { desc = 'Console' })
-    map('n', '<leader>dpW', function()
+    map('n', '<leader>Dd', function()
       toggle_layout(L.watches_repl)
     end, { desc = 'Watches+REPL (66/33)' })
-    map('n', '<leader>dpx', function()
+    map('n', '<leader>Dx', function()
       close_all()
       current = nil
     end, { desc = 'Close all' })
