@@ -64,10 +64,16 @@ else
   chsh -s /bin/zsh
 fi
 
+echo "setting up tmux"
 # Setup tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-echo "Starting tmux session..."
-tmux new-session -d 'tmux source-file ~/.config/tmux/tmux.conf; tmux run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh; tmux kill-session'
-tmux attach-session -d
+# Use a private tmux server to avoid needing a TTY
+TMUX_SOCK=bootstrap
+
+# Start server, source your config, install plugins, stop server
+tmux -L "$TMUX_SOCK" -f /dev/null start-server
+tmux -L "$TMUX_SOCK" source-file "$HOME/.config/tmux/tmux.conf" || true
+"$HOME/.tmux/plugins/tpm/bin/install_plugins" || true
+tmux -L "$TMUX_SOCK" kill-server
 echo "tmux setup complete."
