@@ -75,5 +75,5 @@ TMUX_SOCK=bootstrap
 tmux -L "$TMUX_SOCK" -f /dev/null start-server
 tmux -L "$TMUX_SOCK" source-file "$HOME/.config/tmux/tmux.conf" || true
 "$HOME/.tmux/plugins/tpm/bin/install_plugins" || true
-tmux -L "$TMUX_SOCK" kill-server
+tmux -L "$TMUX_SOCK" kill-server || true
 echo "tmux setup complete."
