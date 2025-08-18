@@ -68,12 +68,10 @@ echo "setting up tmux"
 # Setup tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Use a private tmux server to avoid needing a TTY
-TMUX_SOCK=bootstrap
+token=tpm_done
+tmux start-server \; \
+  source-file ~/.config/tmux/tmux.conf \; \
+  run-shell "~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux wait-for -S $token"
 
-# Start server, source your config, install plugins, stop server
-tmux -L "$TMUX_SOCK" -f /dev/null start-server
-tmux -L "$TMUX_SOCK" source-file "$HOME/.config/tmux/tmux.conf" || true
-"$HOME/.tmux/plugins/tpm/bin/install_plugins" || true
-tmux -L "$TMUX_SOCK" kill-server || true
-echo "tmux setup complete."
+tmux wait-for "$token"
+echo "tmux setup complete.
