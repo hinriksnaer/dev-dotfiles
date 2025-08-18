@@ -75,4 +75,4 @@ tmux start-server \; \
   run-shell "~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux wait-for -S $token" \; \
   wait-for "$token" \; \
   set -g exit-empty on
-echo "tmux setup complete.
+echo "tmux setup complete."
