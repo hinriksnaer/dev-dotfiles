@@ -31,14 +31,15 @@ sudo tar -xzf /tmp/nvim.tar.gz -C /opt
 sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 rm -f /tmp/nvim.tar.gz
 
-# ---- User-level setup ----
-for package in "${packages[@]}"; do
-  if [ ! -d "$DIR/.config/$package" ]; then
-    echo "Directory $DIR/.config/$package does not exist, skipping stow for $package"
-    continue
-  fi
-  echo "Stowing $package in $DIR"
-  stow -t "$DIR" "$package"
+# link 
+for package in "${packages[@]}"; do 
+    # check if file exists 
+    if [ ! -d "$package" ]; then 
+        echo "Directory $DIR/.config/$package does not exist, skipping stow for $package"
+        continue 
+    fi 
+    echo "Stowing $package in $DIR"
+    stow -t "$DIR" "$package" 
 done
 
 stow -t "$DIR" neovim
@@ -67,6 +68,6 @@ fi
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Starting tmux session..."
-tmux new-session -d 'tmux source-file ~/.config/tmux/tmux.conf; tmux run-shell ~/.tmux/plugins/tpm/tpm; tmux kill-session'
+tmux new-session -d 'tmux source-file ~/.config/tmux/tmux.conf; tmux run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh; tmux kill-session'
 tmux attach-session -d
 echo "tmux setup complete."
