@@ -4,6 +4,8 @@ set -e
 # Get either /root or /home/USER depending on the user
 DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; fi)
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
 # Packages to install
 packages=(
   ripgrep
