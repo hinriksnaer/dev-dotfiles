@@ -10,6 +10,8 @@ DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; f
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+echo "→ Installing packages"
+
 # Packages to install
 packages=(
   ripgrep
