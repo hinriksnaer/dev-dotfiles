@@ -5,82 +5,57 @@ echo "→ Init & update submodules"
 git submodule sync --recursive
 git submodule update --init --recursive
 
-# Get either /root or /home/USER depending on the user
-DIR=$(if [ "$(id -u)" -eq 0 ]; then echo "/root"; else echo "/home/$(whoami)"; fi)
-
-cd "$(dirname "${BASH_SOURCE[0]}")"
-
-echo "→ Installing packages"
-
-# Packages to install
-packages=(
-  ripgrep
-  tmux
-  zsh
-  btop
-  fzf
-  stow
-  lsd
-  lazygit
-  starship
-)
 
 # ---- Privileged installs ----
 sudo dnf install -y dnf-plugins-core
-sudo dnf copr enable -y atim/starship
-sudo dnf copr enable -y atim/lazygit
 
 sudo dnf upgrade --refresh -y
-sudo dnf install -y "${packages[@]}"
 
-# Latest Neovim into /opt + /usr/local/bin
-curl -fL -o /tmp/nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
-sudo tar -xzf /tmp/nvim.tar.gz -C /opt
-sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
-rm -f /tmp/nvim.tar.gz
+#!/usr/bin/env bash
+set -euo pipefail
 
-# link 
-for package in "${packages[@]}"; do 
-    # check if file exists 
-    if [ ! -d "$package" ]; then 
-        echo "Directory $DIR/.config/$package does not exist, skipping stow for $package"
-        continue 
-    fi 
-    echo "Stowing $package in $DIR"
-    stow -t "$DIR" "$package" 
-done
+# --- Available installers ---
+installers=(
+  btop
+  lazygit
+  neovim
+  tmux
+  zsh
+)
 
-stow -t "$DIR" neovim
+bash "./scripts/init.sh"
 
-# Install oh-my-zsh (run as user)
-RUNZSH=no KEEP_ZSHRC=yes sh -c \
-  "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme \
-  https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
-
-# Change shell for the current user (needs sudo if run inside devcontainer)
-if command -v sudo &>/dev/null; then
-  sudo chsh -s /bin/zsh "$(whoami)"
-else
-  chsh -s /bin/zsh
+# --- If no args → run all installers ---
+if [ $# -eq 0 ]; then
+  echo "→ No args provided, installing everything..."
+  for name in "${installers[@]}"; do
+    echo "→ Installing $name"
+    bash "./scripts/install-$name.sh"
+  done
+  exit 0
 fi
 
-echo "setting up tmux"
-# Setup tmux plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# --- Otherwise: parse args like --neovim, --zsh, etc. ---
+for arg in "$@"; do
+  case "$arg" in
+    --*)
+      # Strip leading '--'
+      name="${arg#--}"
 
-token=tpm_done
-tmux start-server \; \
-  set -g exit-empty off \; \
-  source-file ~/.config/tmux/tmux.conf \; \
-  run-shell "~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux wait-for -S $token" \; \
-  wait-for "$token" \; \
-  set -g exit-empty on
-echo "tmux setup complete."
+      # Check if valid installer
+      if [[ " ${installers[*]} " =~ " $name " ]]; then
+        echo "→ Installing $name"
+        bash "./scripts/install-$name.sh"
+      else
+        echo "⚠️ Unknown option: $arg"
+        echo "   Valid options: ${installers[*]/#/--}"
+        exit 1
+      fi
+      ;;
+    *)
+      echo "⚠️ Unexpected argument: $arg"
+      echo "   Use flags like --neovim, --tmux, etc."
+      exit 1
+      ;;
+  esac
+done
