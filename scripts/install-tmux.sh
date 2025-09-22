@@ -13,6 +13,9 @@ packages=(
   tmux
 )
 
+sudo dnf upgrade --refresh -y
+sudo dnf install -y "${packages[@]}"
+
 stow -t "$DIR" tmux
 
 echo "setting up tmux"
