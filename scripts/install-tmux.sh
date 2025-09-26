@@ -23,6 +23,7 @@ echo "setting up tmux"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 token=tpm_done
+
 tmux start-server \; \
   set -g exit-empty off \; \
   source-file ~/.config/tmux/tmux.conf \; \
