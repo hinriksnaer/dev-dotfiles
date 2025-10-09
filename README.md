@@ -1,11 +1,6 @@
-Awesome — I dug through the repo structure and put together a clean, ready-to-drop-in `README.md` for you. If you want me to tweak tone, add screenshots/GIFs, or include OS-specific package commands, just holler.
-
-```markdown
 # dev-dotfiles
 
 Development dotfiles for a pleasant terminal setup across workstations and containers.
-
-> Includes configs for Neovim (Lua), Zsh, Tmux, Starship, Lazygit and btop. The repo’s primary code is Lua (for Neovim), with a bit of shell. :contentReference[oaicite:0]{index=0}
 
 ---
 
@@ -23,7 +18,7 @@ install.sh      → helper script to set things up
 
 ````
 
-Repo layout derived from the GitHub tree. Exact file paths map to standard `$XDG_CONFIG_HOME` locations for each tool. :contentReference[oaicite:1]{index=1}
+Repo layout derived from the GitHub tree. Exact file paths map to standard `$XDG_CONFIG_HOME` locations for each tool.
 
 ---
 
@@ -87,10 +82,3 @@ PRs and issues welcome. Keep changes tool-scoped (e.g., Neovim tweaks under `neo
 ## Credits
 
 Built by @hinriksnaer. Repo overview and directory list referenced from the GitHub source. ([GitHub][1])
-
-```
-
-If you want, I can open the `install.sh` and each tool’s config to document exactly what gets linked/installed and any Neovim plugins or Tmux keybindings—just say the word and I’ll expand the README with those details.
-```
-
-[1]: https://github.com/hinriksnaer/dev-dotfiles "GitHub - hinriksnaer/dev-dotfiles: Development dotfiles used for terminal configurations accross different workstations and containers"
