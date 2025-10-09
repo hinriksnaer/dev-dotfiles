@@ -10,6 +10,7 @@ echo "→ Installing stow"
 # Packages to install
 packages=(
   stow
+  node
 )
 
 sudo dnf upgrade --refresh -y
