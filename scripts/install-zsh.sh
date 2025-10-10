@@ -10,18 +10,16 @@ echo "→ Installing Zsh and dependencies"
 
 sudo dnf copr enable -y atim/starship
 
-# Packages to install
-packages=(
-  zsh
-  cargo
-  starship
-)
-
 sudo dnf upgrade --refresh -y
-sudo dnf install -y "${packages[@]}"
+sudo dnf install -y zsh starship
 
-echo "Installing LSD"
-cargo install lsd
+# Try lsd via dnf first; fall back to cargo only if needed
+if ! command -v lsd >/dev/null 2>&1; then
+  if ! sudo dnf install -y lsd; then
+    sudo dnf install -y cargo
+    cargo install lsd
+  fi
+fi
 
 stow -t "$DIR" zsh
 
