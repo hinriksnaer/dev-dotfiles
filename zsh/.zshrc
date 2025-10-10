@@ -1,35 +1,38 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 export ZSH="$HOME/.oh-my-zsh"
 
+# If using Starship, OMZ theme is ignored; you can comment this out.
 ZSH_THEME="agnosterzak"
 
-plugins=( 
-    git
-    dnf
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+plugins=(
+  git
+  dnf
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
-export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}/root/workspace/pytorch"
+
+# Paths
+source "$ZSH/oh-my-zsh.sh"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}/root/workspace/pytorch"
 
-# Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 
+# History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# Set-up icons for files/directories in terminal using lsd
- alias ls='lsd'
- alias l='ls -l'
- alias la='ls -a'
- alias lla='ls -la'
- alias lt='ls --tree'
+# lsd aliases
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
- eval "$(starship init zsh)"
+# Prompt (Starship). If you prefer OMZ theme, remove this line.
+eval "$(starship init zsh)"
+
+source $HOME/.venv/bin/activate
