@@ -13,7 +13,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-export PYTHONPATH=$PYTHONPATH:/root/workspace/pytorch
+export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}/root/workspace/pytorch"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
