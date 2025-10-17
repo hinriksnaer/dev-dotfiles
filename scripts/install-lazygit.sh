@@ -14,11 +14,11 @@ packages=(
 )
 
 # ---- Privileged installs ----
-sudo dnf install -y dnf-plugins-core
-sudo dnf copr enable -y atim/lazygit
+sudo dnf install -qy dnf-plugins-core
+sudo dnf copr enable -qy atim/lazygit
 
-sudo dnf upgrade --refresh -y
-sudo dnf install -y "${packages[@]}"
+sudo dnf upgrade --refresh -qy
+sudo dnf install -qy "${packages[@]}"
 
 stow -t "$DIR" lazygit
 

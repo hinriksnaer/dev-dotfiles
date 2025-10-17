@@ -13,7 +13,7 @@ packages=(
   node
 )
 
-sudo dnf upgrade --refresh -y
-sudo dnf install -y "${packages[@]}"
+sudo dnf upgrade --refresh -qy
+sudo dnf install -qy "${packages[@]}"
 
 

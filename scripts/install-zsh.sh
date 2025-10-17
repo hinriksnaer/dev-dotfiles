@@ -10,13 +10,13 @@ echo "→ Installing Zsh and dependencies"
 
 sudo dnf copr enable -y atim/starship
 
-sudo dnf upgrade --refresh -y
-sudo dnf install -y zsh starship
+sudo dnf upgrade --refresh -qy
+sudo dnf install -qy zsh starship
 
 # Try lsd via dnf first; fall back to cargo only if needed
 if ! command -v lsd >/dev/null 2>&1; then
-  if ! sudo dnf install -y lsd; then
-    sudo dnf install -y cargo
+  if ! sudo dnf install -qy lsd; then
+    sudo dnf install -qy cargo
     cargo install lsd
   fi
 fi
@@ -38,7 +38,7 @@ wget -O ~/.oh-my-zsh/custom/themes/agnosterzak.zsh-theme \
 
 
 if ! command -v chsh &>/dev/null; then
-  sudo dnf install -y util-linux-user
+  sudo dnf install -qy util-linux-user
 fi
 
 # Change shell for the current user (needs sudo if run inside devcontainer)

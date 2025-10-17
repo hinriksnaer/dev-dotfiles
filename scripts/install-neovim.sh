@@ -27,8 +27,8 @@ packages=(
 SUDO=""
 [ "$EUID" -ne 0 ] && SUDO="sudo"
 
-$SUDO dnf upgrade --refresh -y
-$SUDO dnf install -y "${packages[@]}"
+$SUDO dnf upgrade --refresh -qy
+$SUDO dnf install -yq "${packages[@]}"
 
 # --- user-local Neovim install (no sudo) ---
 TMPDIR="$(mktemp -d)"
