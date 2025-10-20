@@ -28,7 +28,6 @@ fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/fun
 
 # Install useful fish plugins
 fish -c "fisher install PatrickF1/fzf.fish"
-fish -c "fisher install kidonng/zoxide.fish"
 
 if ! command -v chsh &>/dev/null; then
   sudo dnf install -qy util-linux-user
