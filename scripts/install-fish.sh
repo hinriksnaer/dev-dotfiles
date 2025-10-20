@@ -12,16 +12,16 @@ sudo dnf copr enable -y atim/starship
 
 sudo dnf upgrade --refresh -qy
 sudo dnf install -qy fish #starship
-#
+
 # # Try lsd via dnf first; fall back to cargo only if needed
-# if ! command -v lsd >/dev/null 2>&1; then
-#   if ! sudo dnf install -qy lsd; then
-#     sudo dnf install -qy cargo
-#     cargo install lsd
-#   fi
-# fi
-#
-# stow -t "$DIR" fish
+if ! command -v lsd >/dev/null 2>&1; then
+  if ! sudo dnf install -qy lsd; then
+    sudo dnf install -qy cargo
+    cargo install lsd
+  fi
+fi
+
+stow -t "$DIR" fish
 #
 # # Install fisher (fish plugin manager)
 # fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
