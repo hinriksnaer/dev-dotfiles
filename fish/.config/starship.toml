@@ -7,17 +7,16 @@ palette = "ayumirage"
 
 # Starship modules
 [character]
-# Note the use of Catppuccin color 'peach'
-success_symbol = "[[󰄛](green) ❯](peach)"
-error_symbol = "[[󰄛](red) ❯](peach)"
-vimcmd_symbol = "[󰄛 ❮](subtext1)" # For use with zsh-vi-mode
+success_symbol = "[[󰄛](success) ❯](symbol)"
+error_symbol = "[[󰄛](error) ❯](symbol)"
+vimcmd_symbol = "[󰄛 ❮](status)"
 
 [git_branch]
-style = "bold mauve"
+style = "bold branch"
 
 [directory]
 truncation_length = 4
-style = "bold lavender"
+style = "bold directory"
 
 
 [palettes.ayumirage]

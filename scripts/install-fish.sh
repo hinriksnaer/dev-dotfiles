@@ -22,18 +22,18 @@ if ! command -v lsd >/dev/null 2>&1; then
 fi
 
 stow -t "$DIR" fish
-#
-# # Install fisher (fish plugin manager)
-# fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-#
-# # Install useful fish plugins
-# fish -c "fisher install PatrickF1/fzf.fish"
-# fish -c "fisher install jethrokuan/z"
-#
-# if ! command -v chsh &>/dev/null; then
-#   sudo dnf install -qy util-linux-user
-# fi
-#
+
+# Install fisher (fish plugin manager)
+fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+
+# Install useful fish plugins
+fish -c "fisher install PatrickF1/fzf.fish"
+fish -c "fisher install jethrokuan/z"
+
+if ! command -v chsh &>/dev/null; then
+  sudo dnf install -qy util-linux-user
+fi
+
 # Change shell for the current user (needs sudo if run inside devcontainer)
 if command -v sudo &>/dev/null; then
   sudo chsh -s /usr/bin/fish "$(whoami)"
