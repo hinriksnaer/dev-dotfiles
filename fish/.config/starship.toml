@@ -1,0 +1,33 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Sets user-defined palette
+# Palettes must be defined _after_ this line
+palette = "ayumirage"
+
+# Starship modules
+[character]
+# Note the use of Catppuccin color 'peach'
+success_symbol = "[[󰄛](green) ❯](peach)"
+error_symbol = "[[󰄛](red) ❯](peach)"
+vimcmd_symbol = "[󰄛 ❮](subtext1)" # For use with zsh-vi-mode
+
+[git_branch]
+style = "bold mauve"
+
+[directory]
+truncation_length = 4
+style = "bold lavender"
+
+
+[palettes.ayumirage]
+error = "#f28779"
+success = "#D5FF80"
+directory = "#FAD07B"
+branch = "#f28779"
+symbol = "#73D0FF"
+status = "#DFBFFF"
+python = "#DCDCAA"
+go = "#9CDCFE"
+node = "#4EC9B0"
+rust = "#4EC9B0"
