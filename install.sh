@@ -20,7 +20,7 @@ installers=(
   lazygit
   neovim
   tmux
-  zsh
+  fish
 )
 
 bash "./scripts/init.sh"
